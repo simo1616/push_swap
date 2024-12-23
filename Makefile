@@ -6,7 +6,7 @@
 #    By: mbendidi <mbendidi@student.42lausanne.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/20 10:04:30 by mbendidi          #+#    #+#              #
-#    Updated: 2024/12/23 17:33:43 by mbendidi         ###   ########.fr        #
+#    Updated: 2024/12/23 20:44:30 by mbendidi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ OBJ_DIR = obj
 HEADER = -I $(INC_DIR) -I libft/inc
 RM = rm -f
 
-SRC_FILES = push.c push_swap.c rev_rotate.c rotate.c sort.c swap.c utils.c
+SRC_FILES = push.c push_swap.c rev_rotate.c rotate.c sort.c swap.c utils.c sort_utils.c
 SRC = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
 
