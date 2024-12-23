@@ -6,13 +6,13 @@
 /*   By: mbendidi <mbendidi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 22:39:49 by mbendidi          #+#    #+#             */
-/*   Updated: 2024/12/23 17:03:18 by mbendidi         ###   ########.fr       */
+/*   Updated: 2024/12/23 22:00:14 by mbendidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	push_a(t_stack *a, t_stack *b)
+void	ft_pa(t_stack *a, t_stack *b)
 {
 	t_node	*tmp;
 
@@ -27,7 +27,7 @@ void	push_a(t_stack *a, t_stack *b)
 	ft_printf("pa\n");
 }
 
-void	push_b(t_stack *a, t_stack *b)
+void	ft_pb(t_stack *a, t_stack *b)
 {
 	t_node	*tmp;
 

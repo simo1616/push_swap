@@ -6,7 +6,7 @@
 /*   By: mbendidi <mbendidi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 10:22:48 by mbendidi          #+#    #+#             */
-/*   Updated: 2024/12/23 17:42:32 by mbendidi         ###   ########.fr       */
+/*   Updated: 2024/12/23 22:18:24 by mbendidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ void		push_top(t_stack *a, int nb);
 void		print_stack(t_stack *a);
 int			check_atoll(const char *str, int *out);
 void		free_stack(t_stack *a);
-void		push_a(t_stack *a, t_stack *b);
-void		push_b(t_stack *a, t_stack *b);
+void		ft_pa(t_stack *a, t_stack *b);
+void		ft_pb(t_stack *a, t_stack *b);
 void		ft_sa(t_stack *stack);
 void		ft_sb(t_stack *stack);
 void		ft_ss(t_stack *a, t_stack *b);
@@ -54,7 +54,12 @@ void		ft_rr(t_stack *a, t_stack *b);
 void		ft_rra(t_stack *a);
 void		ft_rrb(t_stack *b);
 void		ft_rrr(t_stack *a, t_stack *b);
-void		ft_sort_three(t_stack *a);
 void		ft_sort(t_stack *a, t_stack *b);
+void		ft_sort_three(t_stack *a);
+void 		ft_sort_four(t_stack *a, t_stack *b);
+void 		ft_sort_five(t_stack *a, t_stack *b);
+int			ft_position_of_min(t_stack *stack);
+int 		ft_is_sorted(t_stack *stack);
+void 		ft_move_top(t_stack *stack, int index);
 
 #endif
