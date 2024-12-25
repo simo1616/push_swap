@@ -6,7 +6,7 @@
 /*   By: mbendidi <mbendidi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 10:22:29 by mbendidi          #+#    #+#             */
-/*   Updated: 2024/12/23 18:21:57 by mbendidi         ###   ########.fr       */
+/*   Updated: 2024/12/25 01:10:56 by mbendidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,21 +49,30 @@ void	print_stack(t_stack *a)
 	write(1, "\n", 1);
 }
 
-void	push_top(t_stack *a, int nb)
+void	push_bottom(t_stack *a, int nb)
 {
 	t_node *new_node;
+	t_node *tmp;
 
 	new_node = (t_node *)malloc(sizeof(t_node));
 	if(!new_node)
 	{
-		write(2, "\033[31m ERROR D'ALLOCATION \033[0m\n", 30);
+		write(2, "\033[31m ERROR \033[0m\n", 18);
 		exit(1);
 	}
 	new_node->value = nb;
-	new_node->next = a->top;   // Le nouveau node pointe vers l'ancien sommet
-	a->top = new_node;         // Le nouveau node devient le sommet
-    a->size++;                 // Incrémenter la taille de la pile
-	//free(new_node);
+	new_node->next = NULL;
+	if (!a->top)
+	{
+		a->top = new_node;
+		a->size++;
+		return ;
+	}
+	tmp = a->top;
+	while (tmp->next)
+		tmp = tmp->next;
+	tmp->next = new_node;
+    a->size++;
 }
 
 int	has_duplicate(t_stack *a, int nb)
@@ -146,7 +155,7 @@ int	check_and_push(char **av, t_stack *a)
 			free_stack(a);
 			return(0);
 		}
-		push_top(a, nb);
+		push_bottom(a, nb);
 		i++;
 	}
 	return(1);
@@ -157,19 +166,15 @@ int main(int ac, char **av)
 	t_stack	a;
 	t_stack	b;
 	
-	
-	if(ac < 2)
-	{
-		write(2, "\033[31m ERROR \033[0m\n", 18);
+	if(ac <= 2)
 		return(1);
-	}
 	init_stack(&a);
 	init_stack(&b);
 	if (!check_and_push(av, &a))
 		return(1);
-	print_stack(&a);
+	//print_stack(&a);
 	//ft_printf("compte : %d\n", i - 1);
 	ft_sort(&a, &b);
-	print_stack(&a);
+	//print_stack(&a);
 	return(0);
 }

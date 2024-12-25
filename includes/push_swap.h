@@ -6,7 +6,7 @@
 /*   By: mbendidi <mbendidi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 10:22:48 by mbendidi          #+#    #+#             */
-/*   Updated: 2024/12/23 22:18:24 by mbendidi         ###   ########.fr       */
+/*   Updated: 2024/12/25 00:26:30 by mbendidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int			valid_number(char *str);
 void		init_stack(t_stack *stack);
 long long	ft_atoll(const char *str);
 int			has_duplicate(t_stack *a, int nb);
-void		push_top(t_stack *a, int nb);
+void		push_bottom(t_stack *a, int nb);
 void		print_stack(t_stack *a);
 int			check_atoll(const char *str, int *out);
 void		free_stack(t_stack *a);
