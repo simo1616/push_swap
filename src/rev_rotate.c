@@ -6,7 +6,7 @@
 /*   By: mbendidi <mbendidi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 23:46:26 by mbendidi          #+#    #+#             */
-/*   Updated: 2024/12/23 18:29:52 by mbendidi         ###   ########.fr       */
+/*   Updated: 2024/12/25 15:47:53 by mbendidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,27 @@ void	ft_rrb(t_stack *b)
 	b->top = cur;
 	ft_printf("rrb\n");
 }
+static void	ft_rotate_rev(t_stack *s)
+{
+	t_node	*cur;
+	t_node	*prev;
 
+	if (s->size < 2)
+		return ;
+	cur = s->top;
+	prev = NULL;
+	while (cur->next)
+	{
+		prev = cur;
+		cur = cur->next;
+	}
+	prev->next = NULL;
+	cur->next = s->top;
+	s->top = cur;
+}
 void	ft_rrr(t_stack *a, t_stack *b)
 {
-	ft_rra(a);
-	ft_rrb(b);
+	ft_rotate_rev(a);
+	ft_rotate_rev(b);
 	ft_printf("rrr\n");
 }

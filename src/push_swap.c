@@ -6,20 +6,20 @@
 /*   By: mbendidi <mbendidi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 10:22:29 by mbendidi          #+#    #+#             */
-/*   Updated: 2024/12/25 01:10:56 by mbendidi         ###   ########.fr       */
+/*   Updated: 2024/12/26 18:10:04 by mbendidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	free_stack(t_stack *a)
+void    free_stack(t_stack *a)
 {
 	t_node *current;
-	t_node	*next;
+	t_node  *next;
 
 	if (!a)
 		return;
-	
+
 	current = a->top;
 	while(current)
 	{
@@ -32,7 +32,7 @@ void	free_stack(t_stack *a)
 }
 
 //pour tester le bon deroulement de push a
-void	print_stack(t_stack *a)
+void    print_stack(t_stack *a)
 {
 	t_node *tmp;
 	tmp = a->top;
@@ -49,7 +49,7 @@ void	print_stack(t_stack *a)
 	write(1, "\n", 1);
 }
 
-void	push_bottom(t_stack *a, int nb)
+void    push_bottom(t_stack *a, int nb)
 {
 	t_node *new_node;
 	t_node *tmp;
@@ -72,13 +72,13 @@ void	push_bottom(t_stack *a, int nb)
 	while (tmp->next)
 		tmp = tmp->next;
 	tmp->next = new_node;
-    a->size++;
+	a->size++;
 }
 
-int	has_duplicate(t_stack *a, int nb)
+int     has_duplicate(t_stack *a, int nb)
 {
 	t_node *tmp = a->top;
-	
+
 	while(tmp)
 	{
 		if (nb == tmp->value)
@@ -88,19 +88,19 @@ int	has_duplicate(t_stack *a, int nb)
 	return (0);
 }
 
-int	ft_is_digit(char c)
+int     ft_is_digit(char c)
 {
 	return(c >= '0' && c <= '9');
 }
 
-int	ft_is_sign(char c)
+int     ft_is_sign(char c)
 {
 	return(c == '+' || c == '-');
 }
 
-int	valid_number(char *str)
+int     valid_number(char *str)
 {
-	int	i;
+	int     i;
 
 	i = 0;
 	// verifier si pas vide
@@ -117,11 +117,11 @@ int	valid_number(char *str)
 			return(0);
 		i++;
 	}
-	
+
 	return(1);
 }
 
-void	init_stack(t_stack *stack)
+void    init_stack(t_stack *stack)
 {
 	stack->top = NULL;
 	stack->size = 0;
@@ -129,8 +129,8 @@ void	init_stack(t_stack *stack)
 
 int	check_and_push(char **av, t_stack *a)
 {
-	int		i;
-	int		nb;
+	int             i;
+	int             nb;
 
 	i = 1;
 	nb = 0;
@@ -138,20 +138,20 @@ int	check_and_push(char **av, t_stack *a)
 	{
 		if(!valid_number(av[i]))
 		{
-			ft_printf("erreur arg -Non valide- pour le %deme argument \n", i);
+			write(2, "\033[31m ERROR \033[0m\n", 18);
 			free_stack(a);
 			return(0);
 		}
 		nb = ft_atoll(av[i]);
 		if (!check_atoll(av[i], &nb))
 		{
-			ft_printf("erreur arg -Out of range- pour le %deme argument\n", i);
+			write(2, "\033[31m ERROR \033[0m\n", 18);
 			free_stack(a);
 			return(0);
 		}
 		if (has_duplicate(a, nb))
 		{
-			ft_printf("erreur arg -Duplicated- pour le %deme argument \n", i);
+			write(2, "\033[31m ERROR \033[0m\n", 18);
 			free_stack(a);
 			return(0);
 		}
@@ -163,9 +163,9 @@ int	check_and_push(char **av, t_stack *a)
 
 int main(int ac, char **av)
 {
-	t_stack	a;
-	t_stack	b;
-	
+	t_stack a;
+	t_stack b;
+
 	if(ac <= 2)
 		return(1);
 	init_stack(&a);
@@ -176,5 +176,7 @@ int main(int ac, char **av)
 	//ft_printf("compte : %d\n", i - 1);
 	ft_sort(&a, &b);
 	//print_stack(&a);
+	free_stack(&a);
+	free_stack(&b);
 	return(0);
 }

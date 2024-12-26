@@ -6,7 +6,7 @@
 /*   By: mbendidi <mbendidi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 22:39:49 by mbendidi          #+#    #+#             */
-/*   Updated: 2024/12/23 22:00:14 by mbendidi         ###   ########.fr       */
+/*   Updated: 2024/12/25 02:57:11 by mbendidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	ft_pa(t_stack *a, t_stack *b)
 	if (!b || b->size < 1)
 		return ;
 	tmp = b->top;
+	tmp->index = b->top->index;
 	b->top = b->top->next;
 	b->size--;
 	tmp->next = a->top;
@@ -34,6 +35,7 @@ void	ft_pb(t_stack *a, t_stack *b)
 	if (!a || a->size < 1)
 		return ;
 	tmp = a->top;
+	tmp->index = a->top->index;
 	a->top = a->top->next;
 	a->size--;
 	tmp->next = b->top;

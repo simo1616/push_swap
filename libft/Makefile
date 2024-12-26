@@ -6,7 +6,7 @@
 #    By: mbendidi <mbendidi@student.42lausanne.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/17 20:56:21 by mbendidi          #+#    #+#              #
-#    Updated: 2024/12/21 22:27:53 by mbendidi         ###   ########.fr        #
+#    Updated: 2024/12/25 17:38:17 by mbendidi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ FTIS_DIR    = ft_is/
 FTIS        = ft_isalnum ft_isalpha ft_isascii ft_isdigit ft_isprint
 
 FTMEM_DIR   = ft_mem/
-FTMEM       = ft_bzero ft_calloc ft_memchr ft_memcmp ft_memmove ft_memset
+FTMEM       = ft_bzero ft_calloc ft_memchr ft_memcmp ft_memcpy ft_memmove ft_memset
 
 FTPUT_DIR   = ft_put/
 FTPUT       = ft_putchar_fd ft_putendl_fd ft_putnbr_fd ft_putstr_fd

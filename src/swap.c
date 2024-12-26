@@ -6,45 +6,58 @@
 /*   By: mbendidi <mbendidi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 10:31:35 by mbendidi          #+#    #+#             */
-/*   Updated: 2024/12/25 00:31:25 by mbendidi         ###   ########.fr       */
+/*   Updated: 2024/12/25 15:46:26 by mbendidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	ft_sa(t_stack *stack)
+void	ft_sa(t_stack *a)
 {
 	t_node	*first;
 	t_node	*second;
 
-	if (stack->size < 2)
+	if (a->size < 2)
 		return ;
-	first = stack->top;
+	first = a->top;
 	second = first->next;
 	first->next = second->next;
 	second->next = first;
-	stack->top = second;
+	a->top = second;
 	ft_printf("sa\n");
 }
 
-void	ft_sb(t_stack *stack)
+void	ft_sb(t_stack *b)
 {
 	t_node	*first;
 	t_node	*second;
 
-	if (stack->size < 2)
+	if (b->size < 2)
 		return ;
-	first = stack->top;
+	first = b->top;
 	second = first->next;
 	first->next = second->next;
 	second->next = first;
-	stack->top = second;
+	b->top = second;
 	ft_printf("sb\n");
+}
+static void	ft_swap_stack(t_stack *s)
+{
+	t_node	*first;
+	t_node	*second;
+
+	if (s->size < 2)
+		return ;
+	first = s->top;
+	second = first->next;
+	first->next = second->next;
+	second->next = first;
+	s->top = second;
 }
 
 void	ft_ss(t_stack *a, t_stack *b)
 {
-	ft_sa(a);
-	ft_sb(b);
+	ft_swap_stack(a);
+	ft_swap_stack(b);
 	ft_printf("ss\n");
 }
