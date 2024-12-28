@@ -5,27 +5,27 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbendidi <mbendidi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/23 15:29:53 by mbendidi          #+#    #+#             */
-/*   Updated: 2024/12/28 19:37:06 by mbendidi         ###   ########.fr       */
+/*   Created: 2024/12/28 22:52:59 by mbendidi          #+#    #+#             */
+/*   Updated: 2024/12/28 22:54:02 by mbendidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	push_chunk_to_b(t_stack *a, t_stack *b, int start, int end, int size_init)
+void	push_chunk_to_b(t_stack *a, t_stack *b, t_chunk ck)
 {
 	int	chunk_len;
 	int	count_pushed;
 	int	idx;
 
-	chunk_len = end - start + 1;
-	if (chunk_len > size_init - start)
-		chunk_len = size_init - start;
+	chunk_len = ck.end - ck.start + 1;
+	if (chunk_len > ck.size_init - ck.start)
+		chunk_len = ck.size_init - ck.start;
 	count_pushed = 0;
 	while (count_pushed < chunk_len)
 	{
 		idx = a->top->index;
-		if (idx >= start && idx <= end)
+		if (idx >= ck.start && idx <= ck.end)
 		{
 			ft_pb(a, b);
 			count_pushed++;

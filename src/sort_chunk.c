@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbendidi <mbendidi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/28 14:26:56 by mbendidi          #+#    #+#             */
-/*   Updated: 2024/12/28 22:44:27 by mbendidi         ###   ########.fr       */
+/*   Created: 2024/12/28 23:07:26 by mbendidi          #+#    #+#             */
+/*   Updated: 2024/12/28 23:19:49 by mbendidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,42 +44,43 @@ int	get_chunk_size(int size)
 		return (size / 11);
 }
 
-void	process_chunk(t_stack *a, t_stack *b, int i, int chunk_size, int size_init)
+void	process_chunk(t_stack *a, t_stack *b, t_args arg)
 {
-	int	start;
-	int	end;
+	t_chunk	ck;
 
-	start = i * chunk_size;
-	end = (i + 1) * chunk_size - 1;
-	if (end >= size_init)
-		end = size_init - 1;
-	push_chunk_to_b(a, b, start, end, size_init);
+	ck.start = arg.i * arg.chunk_size;
+	ck.end = (arg.i + 1) * arg.chunk_size - 1;
+	if (ck.end >= arg.size_init)
+		ck.end = arg.size_init - 1;
+	ck.size_init = arg.size_init;
+	push_chunk_to_b(a, b, ck);
 }
 
 void	sort_chunks(t_stack *a, t_stack *b)
 {
-	int	size_init;
-	int	nb_chunks;
-	int	chunk_size;
-	int	i;
+	int		size_init;
+	int		nb_chunks;
+	int		chunk_size;
+	int		i;
+	t_args	arg;
 
 	if (ft_is_sorted(a))
 		return ;
 	size_init = a->size;
 	if (size_init <= 100)
-    	nb_chunks = 5;
+		nb_chunks = 5;
 	else
-    	nb_chunks = 11;
-
-	chunk_size = (size_init / nb_chunks);
+		nb_chunks = 11;
+	chunk_size = size_init / nb_chunks;
 	if (size_init % nb_chunks != 0)
 		chunk_size++;
-	index_values(a);
 	i = 0;
 	while (i < nb_chunks)
 	{
-		process_chunk(a, b, i, chunk_size, size_init);
-		i++;
+		arg.i = i++;
+		arg.chunk_size = chunk_size;
+		arg.size_init = size_init;
+		process_chunk(a, b, arg);
 	}
 	bring_back_all_in_order(a, b);
 }
