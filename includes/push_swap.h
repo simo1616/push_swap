@@ -6,7 +6,7 @@
 /*   By: mbendidi <mbendidi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 10:22:48 by mbendidi          #+#    #+#             */
-/*   Updated: 2024/12/26 18:07:35 by mbendidi         ###   ########.fr       */
+/*   Updated: 2024/12/28 09:47:18 by mbendidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void		ft_sort_three(t_stack *a);
 void 		ft_sort_four(t_stack *a, t_stack *b);
 void 		ft_sort_five(t_stack *a, t_stack *b);
 int			ft_position_of_min(t_stack *stack);
+int 		position_of_min_by_value(t_stack *a);
 int 		ft_is_sorted(t_stack *stack);
 void 		ft_move_top(t_stack *stack, int index);
 void 		index_values(t_stack *a);

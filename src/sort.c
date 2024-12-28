@@ -6,7 +6,7 @@
 /*   By: mbendidi <mbendidi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 15:29:53 by mbendidi          #+#    #+#             */
-/*   Updated: 2024/12/26 18:07:38 by mbendidi         ###   ########.fr       */
+/*   Updated: 2024/12/28 09:47:27 by mbendidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,10 @@ void bring_back_to_a(t_stack *a, t_stack *b)
 {
     while (b->size > 0)
     {
-        int max_pos = ft_position_of_max(b); // Trouver l'index du maximum
-        ft_move_top(b, max_pos);            // Déplacer le maximum en haut
-        ft_pa(a, b);                        // Rapatrier dans a
+        int min_pos = ft_position_of_min(b);
+		ft_move_top(b, min_pos);
+		ft_pa(a, b);
+		// Répéter jusqu'à ce que B soit vide                      // Rapatrier dans a
     }
 }
 
@@ -26,9 +27,10 @@ void bring_back_all_in_order(t_stack *a, t_stack *b)
 {
     while (b->size > 0)
     {
-        int max_pos = ft_position_of_max(b); // Trouver l'index du maximum dans B
-        ft_move_top(b, max_pos);            // Amener le maximum au sommet de B
-        ft_pa(a, b);                        // Pousser le maximum dans A
+        int min_pos = ft_position_of_min(b);
+		ft_move_top(b, min_pos);
+		ft_pa(a, b);
+		// Répéter jusqu'à ce que B soit vide
     }
 }
 
@@ -64,10 +66,12 @@ int get_chunk_size(int size)
 
 void sort_chunks(t_stack *a, t_stack *b)
 {
-    int chunk_size = get_chunk_size(a->size); // Calcul de la taille d’un chunk
+	int chunk_size = get_chunk_size(a->size); // Calcul de la taille d’un chunk
     int start = 0;
     int end = chunk_size - 1;
 
+	if (ft_is_sorted(a))
+        return;
     // Pousser tous les chunks dans B
     while (start < a->size)
     {
@@ -83,6 +87,7 @@ void sort_chunks(t_stack *a, t_stack *b)
 }
 
 
+
 void ft_sort_five(t_stack *a, t_stack *b)
 {
     int min_pos;
@@ -90,11 +95,11 @@ void ft_sort_five(t_stack *a, t_stack *b)
 	if (ft_is_sorted(a))
         return;
     // ============ 1er plus petit =============
-    min_pos = ft_position_of_min(a); 
+    min_pos = position_of_min_by_value(a); 
     ft_move_top(a, min_pos); // via ra/rra, comme pour 4 éléments
     ft_pb(a, b);             // On envoie ce plus petit dans B
     // ============ 2e plus petit =============
-    min_pos = ft_position_of_min(a); 
+    min_pos = position_of_min_by_value(a);
     ft_move_top(a, min_pos);
     ft_pb(a, b);
     // ============ Trier les 3 restants dans A
@@ -112,11 +117,11 @@ void ft_sort_five(t_stack *a, t_stack *b)
 
 void ft_sort_four(t_stack *a, t_stack *b)
 {
-    int min_pos;
-	
-	if (ft_is_sorted(a))
+	if (ft_is_sorted(a)) // regrouper tout les verifications dans un seul endroit ????????????????
         return;
-	min_pos = ft_position_of_min(a);
+
+    int min_pos;
+	min_pos = position_of_min_by_value(a); 
     if (min_pos == 1)
         ft_ra(a);
     else if (min_pos == 2)
@@ -160,6 +165,8 @@ void	ft_sort_three(t_stack *a)
 
 void	ft_sort(t_stack *a, t_stack *b)
 {
+	if (a->size <= 1 || ft_is_sorted(a))
+    	return;
 	if (a->size == 2)
 	{
 		if(a->top->value > a->top->next->value)

@@ -6,7 +6,7 @@
 /*   By: mbendidi <mbendidi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 10:22:29 by mbendidi          #+#    #+#             */
-/*   Updated: 2024/12/26 18:10:04 by mbendidi         ###   ########.fr       */
+/*   Updated: 2024/12/28 10:12:51 by mbendidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void    push_bottom(t_stack *a, int nb)
 	new_node = (t_node *)malloc(sizeof(t_node));
 	if(!new_node)
 	{
-		write(2, "\033[31m ERROR \033[0m\n", 18);
+		write(2, "\033[31m ERROR MLK\033[0m\n", 21);
 		exit(1);
 	}
 	new_node->value = nb;
@@ -138,20 +138,20 @@ int	check_and_push(char **av, t_stack *a)
 	{
 		if(!valid_number(av[i]))
 		{
-			write(2, "\033[31m ERROR \033[0m\n", 18);
+			write(2, "\033[31m ERROR VN\033[0m\n", 20);
 			free_stack(a);
 			return(0);
 		}
 		nb = ft_atoll(av[i]);
 		if (!check_atoll(av[i], &nb))
 		{
-			write(2, "\033[31m ERROR \033[0m\n", 18);
+			write(2, "\033[31m ERROR ATL\033[0m\n", 21);
 			free_stack(a);
 			return(0);
 		}
 		if (has_duplicate(a, nb))
 		{
-			write(2, "\033[31m ERROR \033[0m\n", 18);
+			write(2, "\033[31m ERROR DPLK\033[0m\n", 22);
 			free_stack(a);
 			return(0);
 		}
@@ -163,20 +163,32 @@ int	check_and_push(char **av, t_stack *a)
 
 int main(int ac, char **av)
 {
-	t_stack a;
-	t_stack b;
+    t_stack a, b;
 
-	if(ac <= 2)
-		return(1);
-	init_stack(&a);
-	init_stack(&b);
-	if (!check_and_push(av, &a))
-		return(1);
+    // Cas "ac <= 1" => pas d'arguments => do nothing, return 0
+    if (ac <= 1)
+        return (0); // Pas d'affichage, invite directe
+
+    init_stack(&a);
+    init_stack(&b);
+
+    // Remplir la pile a...
+    if (!check_and_push(av, &a))
+        return (1);
+
+    // Si a->size <= 1 => pas d'opérations
+    // ou si ft_is_sorted(a) => pas d'opérations
+    if (a.size <= 1 || ft_is_sorted(&a))
+    {
+        free_stack(&a);
+        free_stack(&b);
+        return (0); 
+    }
 	//print_stack(&a);
-	//ft_printf("compte : %d\n", i - 1);
-	ft_sort(&a, &b);
+    ft_sort(&a, &b);
 	//print_stack(&a);
-	free_stack(&a);
-	free_stack(&b);
-	return(0);
+    free_stack(&a);
+    free_stack(&b);
+    return (0);
 }
+
