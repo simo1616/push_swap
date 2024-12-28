@@ -6,7 +6,7 @@
 /*   By: mbendidi <mbendidi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 14:26:56 by mbendidi          #+#    #+#             */
-/*   Updated: 2024/12/28 19:37:01 by mbendidi         ###   ########.fr       */
+/*   Updated: 2024/12/28 22:44:27 by mbendidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,11 @@ void	sort_chunks(t_stack *a, t_stack *b)
 	if (ft_is_sorted(a))
 		return ;
 	size_init = a->size;
-	nb_chunks = (size_init <= 100) ? 5 : 11;
+	if (size_init <= 100)
+    	nb_chunks = 5;
+	else
+    	nb_chunks = 11;
+
 	chunk_size = (size_init / nb_chunks);
 	if (size_init % nb_chunks != 0)
 		chunk_size++;

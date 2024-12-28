@@ -1,20 +1,31 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   a_suprimer.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mbendidi <mbendidi@student.42lausanne.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/28 22:38:06 by mbendidi          #+#    #+#             */
+/*   Updated: 2024/12/28 22:38:19 by mbendidi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-//pour tester le bon deroulement de push a
-void print_stack(t_stack *stack)
+void	print_stack(t_stack *stack)
 {
-    t_node *tmp;
+	t_node	*tmp;
 
-    if (!stack || !stack->top) // Vérifie si la pile est valide et non vide
-    {
-        ft_printf("\033[31mLa pile est vide ou invalide.\033[0m\n");
-        return;
-    }
-    tmp = stack->top;
-    while (tmp)
-    {
-        ft_printf("%d\t", tmp->value);
-        tmp = tmp->next;
-    }
-    ft_printf("\n");
+	if (!stack || !stack->top)
+	{
+		ft_printf("\033[31mLa pile est vide ou invalide.\033[0m\n");
+		return ;
+	}
+	tmp = stack->top;
+	while (tmp)
+	{
+		ft_printf("%d\t", tmp->value);
+		tmp = tmp->next;
+	}
+	ft_printf("\n");
 }

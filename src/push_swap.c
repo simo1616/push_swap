@@ -6,22 +6,21 @@
 /*   By: mbendidi <mbendidi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 10:22:29 by mbendidi          #+#    #+#             */
-/*   Updated: 2024/12/28 16:53:58 by mbendidi         ###   ########.fr       */
+/*   Updated: 2024/12/28 22:36:40 by mbendidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void    free_stack(t_stack *a)
+void	free_stack(t_stack *a)
 {
-	t_node *current;
-	t_node  *next;
+	t_node	*current;
+	t_node	*next;
 
 	if (!a)
-		return;
-
+		return ;
 	current = a->top;
-	while(current)
+	while (current)
 	{
 		next = current->next;
 		free(current);
@@ -31,13 +30,13 @@ void    free_stack(t_stack *a)
 	a->size = 0;
 }
 
-void    push_bottom(t_stack *a, int nb)
+void	push_bottom(t_stack *a, int nb)
 {
-	t_node *new_node;
-	t_node *tmp;
+	t_node	*new_node;
+	t_node	*tmp;
 
 	new_node = (t_node *)malloc(sizeof(t_node));
-	if(!new_node)
+	if (!new_node)
 	{
 		write(2, "\033[31m ERROR MLK\033[0m\n", 21);
 		exit(1);
@@ -57,8 +56,7 @@ void    push_bottom(t_stack *a, int nb)
 	a->size++;
 }
 
-
-void    init_stack(t_stack *stack)
+void	init_stack(t_stack *stack)
 {
 	stack->top = NULL;
 	stack->size = 0;
@@ -66,66 +64,51 @@ void    init_stack(t_stack *stack)
 
 int	check_and_push(char **av, t_stack *a)
 {
-	int             i;
-	int             nb;
+	int	i;
+	int	nb;
 
 	i = 1;
 	nb = 0;
-	while(av[i])
+	while (av[i])
 	{
-		if(!valid_number(av[i]))
+		if (!valid_number(av[i]))
 		{
 			write(2, "\033[31m ERROR VN\033[0m\n", 20);
 			free_stack(a);
-			return(0);
+			return (0);
 		}
 		nb = ft_atoll(av[i]);
-		if (!check_atoll(av[i], &nb))
+		if (!check_atoll(av[i], &nb) || has_duplicate(a, nb))
 		{
-			write(2, "\033[31m ERROR ATL\033[0m\n", 21);
+			write(2, "\033[31m ERROR ATL or DPLK \033[0m\n", 30);
 			free_stack(a);
-			return(0);
-		}
-		if (has_duplicate(a, nb))
-		{
-			write(2, "\033[31m ERROR DPLK\033[0m\n", 22);
-			free_stack(a);
-			return(0);
+			return (0);
 		}
 		push_bottom(a, nb);
 		i++;
 	}
-	return(1);
+	return (1);
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
-    t_stack a, b;
+	t_stack	a;
+	t_stack	b;
 
-    // Cas "ac <= 1" => pas d'arguments => do nothing, return 0
-    if (ac <= 1)
-        return (0); // Pas d'affichage, invite directe
-
-    init_stack(&a);
-    init_stack(&b);
-
-    // Remplir la pile a...
-    if (!check_and_push(av, &a))
-        return (1);
-
-    // Si a->size <= 1 => pas d'opérations
-    // ou si ft_is_sorted(a) => pas d'opérations
-    if (a.size <= 1 || ft_is_sorted(&a))
-    {
-        free_stack(&a);
-        free_stack(&b);
-        return (0); 
-    }
-	//print_stack(&a);
-    ft_sort(&a, &b);
-	//print_stack(&a);
-    free_stack(&a);
-    free_stack(&b);
-    return (0);
+	if (ac <= 1)
+		return (0);
+	init_stack(&a);
+	init_stack(&b);
+	if (!check_and_push(av, &a))
+		return (1);
+	if (a.size <= 1 || ft_is_sorted(&a))
+	{
+		free_stack(&a);
+		free_stack(&b);
+		return (0);
+	}
+	ft_sort(&a, &b);
+	free_stack(&a);
+	free_stack(&b);
+	return (0);
 }
-
