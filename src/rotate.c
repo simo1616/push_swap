@@ -6,7 +6,7 @@
 /*   By: mbendidi <mbendidi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/21 23:18:18 by mbendidi          #+#    #+#             */
-/*   Updated: 2024/12/25 13:28:51 by mbendidi         ###   ########.fr       */
+/*   Updated: 2024/12/28 19:11:08 by mbendidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,13 @@ void	ft_rb(t_stack *b)
 	ft_printf("rb\n");
 }
 
-static void rotate_stack(t_stack *s)
+static void	rotate_stack(t_stack *s)
 {
-	t_node *tmp;
-	t_node *cur;
+	t_node	*tmp;
+	t_node	*cur;
 
 	if (!s || s->size < 2)
-		return;
+		return ;
 	tmp = s->top;
 	s->top = s->top->next;
 	cur = s->top;
@@ -62,10 +62,9 @@ static void rotate_stack(t_stack *s)
 	tmp->next = NULL;
 }
 
-void ft_rr(t_stack *a, t_stack *b)
+void	ft_rr(t_stack *a, t_stack *b)
 {
-    rotate_stack(a);  // pas de printf
-    rotate_stack(b);  // pas de printf
-    ft_printf("rr\n"); // on imprime UNE SEULE instruction : rr
+	rotate_stack(a);
+	rotate_stack(b);
+	ft_printf("rr\n");
 }
-

@@ -6,7 +6,7 @@
 #    By: mbendidi <mbendidi@student.42lausanne.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/20 10:04:30 by mbendidi          #+#    #+#              #
-#    Updated: 2024/12/23 20:44:30 by mbendidi         ###   ########.fr        #
+#    Updated: 2024/12/28 16:35:42 by mbendidi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,12 @@ OBJ_DIR = obj
 HEADER = -I $(INC_DIR) -I libft/inc
 RM = rm -f
 
-SRC_FILES = push.c push_swap.c rev_rotate.c rotate.c sort.c swap.c utils.c sort_utils.c
+SRC_FILES = push.c push_swap.c rev_rotate.c \
+			rotate.c sort.c swap.c utils.c \
+			sort_utils.c check.c sort_chunk.c \
+			sort_funct.c	\
+			ft_is.c a_suprimer.c \
+
 SRC = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
 
@@ -52,6 +57,13 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
+
+# pour le test en ligne docker
+WASM_NAME = push_swap
+WASM_SOURCES = $(shell find src libft/src -name '*.c' | grep -v 'get_next_line_utils.c')
+
+wasm: $(WASM_SOURCES)
+	docker run --rm -v "$(shell pwd):/src" emscripten/emsdk emcc $(WASM_SOURCES) -I includes -I libft/inc -o $(WASM_NAME).wasm -s WASM=1 -O2
 
 clean:
 	@$(RM) -r $(OBJ_DIR)

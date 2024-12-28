@@ -6,7 +6,7 @@
 /*   By: mbendidi <mbendidi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 10:31:35 by mbendidi          #+#    #+#             */
-/*   Updated: 2024/12/25 15:46:26 by mbendidi         ###   ########.fr       */
+/*   Updated: 2024/12/28 19:20:10 by mbendidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	ft_sb(t_stack *b)
 	b->top = second;
 	ft_printf("sb\n");
 }
+
 static void	ft_swap_stack(t_stack *s)
 {
 	t_node	*first;

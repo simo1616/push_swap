@@ -6,7 +6,7 @@
 /*   By: mbendidi <mbendidi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 10:22:29 by mbendidi          #+#    #+#             */
-/*   Updated: 2024/12/28 10:12:51 by mbendidi         ###   ########.fr       */
+/*   Updated: 2024/12/28 16:53:58 by mbendidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,24 +29,6 @@ void    free_stack(t_stack *a)
 	}
 	a->top = NULL;
 	a->size = 0;
-}
-
-//pour tester le bon deroulement de push a
-void    print_stack(t_stack *a)
-{
-	t_node *tmp;
-	tmp = a->top;
-	if(!tmp)
-	{
-		write(2, "\033[31m ERROR PRINT_STACK \033[0m\n", 30);
-		exit(1);
-	}
-	while(tmp)
-	{
-		ft_printf("%d\t", tmp->value);
-		tmp = tmp->next;
-	}
-	write(1, "\n", 1);
 }
 
 void    push_bottom(t_stack *a, int nb)
@@ -75,51 +57,6 @@ void    push_bottom(t_stack *a, int nb)
 	a->size++;
 }
 
-int     has_duplicate(t_stack *a, int nb)
-{
-	t_node *tmp = a->top;
-
-	while(tmp)
-	{
-		if (nb == tmp->value)
-			return(1);
-		tmp = tmp->next;
-	}
-	return (0);
-}
-
-int     ft_is_digit(char c)
-{
-	return(c >= '0' && c <= '9');
-}
-
-int     ft_is_sign(char c)
-{
-	return(c == '+' || c == '-');
-}
-
-int     valid_number(char *str)
-{
-	int     i;
-
-	i = 0;
-	// verifier si pas vide
-	if(!str || !str[i])
-		return (0);
-	// verifier si + ou -
-	if(ft_is_sign(str[i]))
-		i++;
-	if(!str[i])
-		return (0);
-	while(str[i])
-	{
-		if(!ft_is_digit(str[i]))
-			return(0);
-		i++;
-	}
-
-	return(1);
-}
 
 void    init_stack(t_stack *stack)
 {
