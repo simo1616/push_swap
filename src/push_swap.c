@@ -6,7 +6,7 @@
 /*   By: mbendidi <mbendidi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 10:22:29 by mbendidi          #+#    #+#             */
-/*   Updated: 2024/12/29 15:40:04 by mbendidi         ###   ########.fr       */
+/*   Updated: 2024/12/29 16:33:09 by mbendidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	push_bottom(t_stack *a, int nb)
 	new_node = (t_node *)malloc(sizeof(t_node));
 	if (!new_node)
 	{
-		write(2, "\033[31m ERROR MLK\033[0m\n", 21);
+		write(2, "ERROR\n", 7);
 		exit(1);
 	}
 	new_node->value = nb;
@@ -74,14 +74,14 @@ int	check_and_push(char **av, t_stack *a)
 	{
 		if (!valid_number(av[i]))
 		{
-			write(2, "\033[31m ERROR VN\033[0m\n", 20);
+			write(2, "ERROR\n", 7);
 			free_stack(a);
 			return (0);
 		}
 		nb = ft_atoll(av[i]);
 		if (!check_atoll(av[i], &nb) || has_duplicate(a, nb))
 		{
-			write(2, "\033[31m ERROR ATL or DPLK \033[0m\n", 30);
+			write(2, "ERROR\n", 7);
 			free_stack(a);
 			return (0);
 		}

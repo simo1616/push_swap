@@ -6,7 +6,7 @@
 /*   By: mbendidi <mbendidi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 10:22:48 by mbendidi          #+#    #+#             */
-/*   Updated: 2024/12/29 15:39:15 by mbendidi         ###   ########.fr       */
+/*   Updated: 2024/12/29 16:42:47 by mbendidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 typedef struct s_node
 {
 	int				value;
-	int             index;
+	int				index;
 	struct s_node	*next;
 }	t_node;
 
@@ -36,16 +36,16 @@ typedef struct s_stack
 
 typedef struct s_chunk
 {
-    int start;
-    int end;
-    int size_init;
+	int				start;
+	int				end;
+	int				size_init;
 }	t_chunk;
 
 typedef struct s_args
 {
-	int i;
-	int chunk_size;
-	int size_init;
+	int				i;
+	int				chunk_size;
+	int				size_init;
 }	t_args;
 
 void		init_stack(t_stack *stack, char id);
@@ -71,19 +71,20 @@ void		ft_rrb(t_stack *b);
 void		ft_rrr(t_stack *a, t_stack *b);
 void		ft_sort(t_stack *a, t_stack *b);
 void		ft_sort_three(t_stack *a);
-void 		ft_sort_four(t_stack *a, t_stack *b);
-void 		ft_sort_five(t_stack *a, t_stack *b);
+void		ft_sort_four(t_stack *a, t_stack *b);
+void		ft_sort_five(t_stack *a, t_stack *b);
 int			ft_position_of_min(t_stack *stack);
-int 		position_of_min_by_value(t_stack *a);
-int 		ft_is_sorted(t_stack *stack);
-void 		ft_move_top(t_stack *stack, int index);
-void 		index_values(t_stack *a);
-void 		bring_back_to_a(t_stack *a, t_stack *b);
+int			position_of_min_by_value(t_stack *a);
+int			ft_is_sorted(t_stack *stack);
+void		ft_move_top(t_stack *stack, int index);
+void		index_values(t_stack *a);
+void		bring_back_to_a(t_stack *a, t_stack *b);
 void		push_chunk_to_b(t_stack *a, t_stack *b, t_chunk ck);
-int 		get_chunk_size(int size);
+int			get_chunk_size(int size);
 void		process_chunk(t_stack *a, t_stack *b, t_args arg);
-void 		sort_chunks(t_stack *a, t_stack *b);
-void 		bring_back_all_in_order(t_stack *a, t_stack *b);
+void		sort_chunks(t_stack *a, t_stack *b);
+void		bring_back_all_in_order(t_stack *a, t_stack *b);
 int			ft_position_of_max(t_stack *stack);
+int			find_position_in_stack(t_stack *stack, int start, int end);
 
 #endif

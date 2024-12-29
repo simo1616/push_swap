@@ -6,7 +6,7 @@
 /*   By: mbendidi <mbendidi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/23 20:43:57 by mbendidi          #+#    #+#             */
-/*   Updated: 2024/12/29 15:37:07 by mbendidi         ###   ########.fr       */
+/*   Updated: 2024/12/29 16:45:29 by mbendidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ void	ft_move_top(t_stack *stack, int index)
 	{
 		while (index > 0)
 		{
-			if (stack->id == 'A') // Ajoutez un identifiant pour différencier les piles
+			if (stack->id == 'A')
 				ft_ra(stack);
 			else if (stack->id == 'B')
 				ft_rb(stack);
@@ -123,7 +123,7 @@ void	ft_move_top(t_stack *stack, int index)
 	{
 		while (index < stack->size)
 		{
-			if (stack->id == 'A') // Vérifiez l'identifiant
+			if (stack->id == 'A')
 				ft_rra(stack);
 			else if (stack->id == 'B')
 				ft_rrb(stack);
@@ -131,4 +131,3 @@ void	ft_move_top(t_stack *stack, int index)
 		}
 	}
 }
-

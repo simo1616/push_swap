@@ -6,32 +6,45 @@
 /*   By: mbendidi <mbendidi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 22:52:59 by mbendidi          #+#    #+#             */
-/*   Updated: 2024/12/28 22:54:02 by mbendidi         ###   ########.fr       */
+/*   Updated: 2024/12/29 17:06:26 by mbendidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+int	find_position_in_stack(t_stack *stack, int start, int end)
+{
+	t_node	*cur;
+	int		pos;
+
+	cur = stack->top;
+	pos = 0;
+	while (cur)
+	{
+		if (cur->index >= start && cur->index <= end)
+			return (pos);
+		cur = cur->next;
+		pos++;
+	}
+	return (-1);
+}
+
 void	push_chunk_to_b(t_stack *a, t_stack *b, t_chunk ck)
 {
 	int	chunk_len;
 	int	count_pushed;
-	int	idx;
+	int	pos;
 
 	chunk_len = ck.end - ck.start + 1;
-	if (chunk_len > ck.size_init - ck.start)
-		chunk_len = ck.size_init - ck.start;
 	count_pushed = 0;
 	while (count_pushed < chunk_len)
 	{
-		idx = a->top->index;
-		if (idx >= ck.start && idx <= ck.end)
-		{
-			ft_pb(a, b);
-			count_pushed++;
-		}
-		else
-			ft_ra(a);
+		pos = find_position_in_stack(a, ck.start, ck.end);
+		if (pos == -1)
+			break ;
+		ft_move_top(a, pos);
+		ft_pb(a, b);
+		count_pushed++;
 	}
 }
 
