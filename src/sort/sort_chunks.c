@@ -1,47 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_chunk.c                                       :+:      :+:    :+:   */
+/*   sort_chunks.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbendidi <mbendidi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/28 23:07:26 by mbendidi          #+#    #+#             */
-/*   Updated: 2024/12/28 23:19:49 by mbendidi         ###   ########.fr       */
+/*   Created: 2024/12/29 18:47:31 by mbendidi          #+#    #+#             */
+/*   Updated: 2024/12/29 18:54:13 by mbendidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	bring_back_to_a(t_stack *a, t_stack *b)
+void	push_chunk_to_b(t_stack *a, t_stack *b, t_chunk ck)
 {
-	int	min_pos;
+	int	chunk_len;
+	int	count_pushed;
+	int	pos;
 
-	while (b->size > 0)
+	chunk_len = ck.end - ck.start + 1;
+	count_pushed = 0;
+	while (count_pushed < chunk_len)
 	{
-		min_pos = ft_position_of_min(b);
-		ft_move_top(b, min_pos);
-		ft_pa(a, b);
+		pos = find_position_in_stack(a, ck.start, ck.end);
+		if (pos == -1)
+			break ;
+		ft_move_top(a, pos);
+		ft_pb(a, b);
+		count_pushed++;
 	}
-}
-
-void	bring_back_all_in_order(t_stack *a, t_stack *b)
-{
-	int	max_pos;
-
-	while (b->size > 0)
-	{
-		max_pos = ft_position_of_max(b);
-		ft_move_top(b, max_pos);
-		ft_pa(a, b);
-	}
-}
-
-int	get_chunk_size(int size)
-{
-	if (size <= 100)
-		return (size / 5);
-	else
-		return (size / 11);
 }
 
 void	process_chunk(t_stack *a, t_stack *b, t_args arg)
@@ -83,4 +70,16 @@ void	sort_chunks(t_stack *a, t_stack *b)
 		process_chunk(a, b, arg);
 	}
 	bring_back_all_in_order(a, b);
+}
+
+void	bring_back_all_in_order(t_stack *a, t_stack *b)
+{
+	int	max_pos;
+
+	while (b->size > 0)
+	{
+		max_pos = ft_position_of_max(b);
+		ft_move_top(b, max_pos);
+		ft_pa(a, b);
+	}
 }

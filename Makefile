@@ -6,7 +6,7 @@
 #    By: mbendidi <mbendidi@student.42lausanne.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/20 10:04:30 by mbendidi          #+#    #+#              #
-#    Updated: 2024/12/28 16:35:42 by mbendidi         ###   ########.fr        #
+#    Updated: 2024/12/29 19:25:10 by mbendidi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,17 +20,32 @@ SRC_DIR = src
 INC_DIR = includes
 LIBFT = libft
 OBJ_DIR = obj
-HEADER = -I $(INC_DIR) -I libft/inc
+HEADER = -I $(INC_DIR) -I $(LIBFT)/inc
 RM = rm -f
 
-SRC_FILES = push.c push_swap.c rev_rotate.c \
-			rotate.c sort.c swap.c utils.c \
-			sort_utils.c check.c sort_chunk.c \
-			sort_funct.c	\
-			ft_is.c a_suprimer.c \
+SRC_FILES = core/main.c \
+            core/init_stack.c \
+            core/ft_sort.c \
+            core/push_swap.c \
+            actions/push.c \
+            actions/swap.c \
+            actions/rotate.c \
+            actions/rev_rotate.c \
+            sort/sort.c \
+            sort/sort_basic.c \
+            sort/sort_chunk.c \
+            sort/sort_chunks.c \
+            utils/utils.c \
+            utils/sort_utils.c \
+            utils/helpers.c \
+            utils/validation.c \
+            utils/display.c \
+			utils/ft_is.c \
+            utils/a_suprimer.c
 
-SRC = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
-OBJ = $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
+
+SRCS = $(addprefix $(SRC_DIR)/, $(SRC_FILES))
+OBJS = $(addprefix $(OBJ_DIR)/, $(SRC_FILES:.c=.o))
 
 TOTAL = $(words $(SRC_FILES))
 COUNT = 0
@@ -41,12 +56,14 @@ all: $(OBJ_DIR) $(LIBFT)/libft.a $(NAME)
 $(LIBFT)/libft.a:
 	@make -C $(LIBFT)
 
-$(NAME): $(OBJ)
-	@$(CC) $(CFLAGS) $(OBJ) $(HEADER) $(LIBFT)/libft.a -o $(NAME)
+$(NAME): $(OBJS)
+	@$(CC) $(CFLAGS) $(OBJS) $(HEADER) $(LIBFT)/libft.a -o $(NAME)
 	@printf "\r\033[K"
 	@printf "%0*s100%%%s\n" $(BAR_WIDTH) "=" " push_swap compiled"
 
+# Règle pour compiler chaque fichier source en fichier objet
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	@mkdir -p $(@D) # Crée les sous-dossiers de obj/ dynamiquement
 	@$(eval COUNT=$(shell echo $$(($(COUNT)+1))))
 	@(\
 		PCT=$$((100*$(COUNT)/$(TOTAL))); \
@@ -58,12 +75,12 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 
-# pour le test en ligne docker
+# Pour la compilation WASM
 WASM_NAME = push_swap
 WASM_SOURCES = $(shell find src libft/src -name '*.c' | grep -v 'get_next_line_utils.c')
 
 wasm: $(WASM_SOURCES)
-	docker run --rm -v "$(shell pwd):/src" emscripten/emsdk emcc $(WASM_SOURCES) -I includes -I libft/inc -o $(WASM_NAME).wasm -s WASM=1 -O2
+	docker run --rm -v "$(shell pwd):/src" emscripten/emsdk emcc $(WASM_SOURCES) -I $(INC_DIR) -I $(LIBFT)/inc -o $(WASM_NAME).wasm -s WASM=1 -O2
 
 clean:
 	@$(RM) -r $(OBJ_DIR)
@@ -78,6 +95,6 @@ fclean: clean
 re: fclean all
 
 norm:
-	@norminette $(SRC) $(INC_DIR) $(LIBFT) | grep -v Norme -B1 || true
+	@norminette $(SRCS) $(INC_DIR) $(LIBFT) | grep -v Norme -B1 || true
 
 .PHONY: all clean fclean re norm

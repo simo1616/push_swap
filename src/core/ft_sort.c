@@ -1,66 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort.c                                             :+:      :+:    :+:   */
+/*   ft_sort.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mbendidi <mbendidi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/28 22:52:59 by mbendidi          #+#    #+#             */
-/*   Updated: 2024/12/29 17:06:26 by mbendidi         ###   ########.fr       */
+/*   Created: 2024/12/29 18:35:41 by mbendidi          #+#    #+#             */
+/*   Updated: 2024/12/29 19:28:56 by mbendidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-int	find_position_in_stack(t_stack *stack, int start, int end)
-{
-	t_node	*cur;
-	int		pos;
-
-	cur = stack->top;
-	pos = 0;
-	while (cur)
-	{
-		if (cur->index >= start && cur->index <= end)
-			return (pos);
-		cur = cur->next;
-		pos++;
-	}
-	return (-1);
-}
-
-void	push_chunk_to_b(t_stack *a, t_stack *b, t_chunk ck)
-{
-	int	chunk_len;
-	int	count_pushed;
-	int	pos;
-
-	chunk_len = ck.end - ck.start + 1;
-	count_pushed = 0;
-	while (count_pushed < chunk_len)
-	{
-		pos = find_position_in_stack(a, ck.start, ck.end);
-		if (pos == -1)
-			break ;
-		ft_move_top(a, pos);
-		ft_pb(a, b);
-		count_pushed++;
-	}
-}
-
-int	ft_is_sorted(t_stack *stack)
-{
-	t_node	*cur;
-
-	cur = stack->top;
-	while (cur && cur->next)
-	{
-		if (cur->value > cur->next->value)
-			return (0);
-		cur = cur->next;
-	}
-	return (1);
-}
 
 void	ft_sort(t_stack *a, t_stack *b)
 {

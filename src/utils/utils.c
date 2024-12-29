@@ -6,7 +6,7 @@
 /*   By: mbendidi <mbendidi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 15:46:58 by mbendidi          #+#    #+#             */
-/*   Updated: 2024/12/23 16:57:33 by mbendidi         ###   ########.fr       */
+/*   Updated: 2024/12/29 18:56:52 by mbendidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,4 @@ long long	ft_atoll(const char *str)
 		cnt++;
 	}
 	return ((num * neg));
-}
-
-int	check_atoll(const char *str, int *out)
-{
-	long long	val;
-
-	val = ft_atoll(str);
-	if (val > INT_MAX || val < INT_MIN)
-		return (0);
-	*out = (int)val;
-	return (1);
 }
