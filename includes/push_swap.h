@@ -6,7 +6,7 @@
 /*   By: mbendidi <mbendidi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 10:22:48 by mbendidi          #+#    #+#             */
-/*   Updated: 2024/12/28 23:10:37 by mbendidi         ###   ########.fr       */
+/*   Updated: 2024/12/29 15:39:15 by mbendidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct s_stack
 {
 	t_node			*top;
 	int				size;
+	char			id;
 }	t_stack;
 
 typedef struct s_chunk
@@ -47,11 +48,10 @@ typedef struct s_args
 	int size_init;
 }	t_args;
 
-void		init_stack(t_stack *stack);
+void		init_stack(t_stack *stack, char id);
 int			ft_is_digit(char c);
 int			ft_is_sign(char c);
 int			valid_number(char *str);
-void		init_stack(t_stack *stack);
 long long	ft_atoll(const char *str);
 int			has_duplicate(t_stack *a, int nb);
 void		push_bottom(t_stack *a, int nb);

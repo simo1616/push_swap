@@ -6,7 +6,7 @@
 /*   By: mbendidi <mbendidi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 10:22:29 by mbendidi          #+#    #+#             */
-/*   Updated: 2024/12/28 22:36:40 by mbendidi         ###   ########.fr       */
+/*   Updated: 2024/12/29 15:40:04 by mbendidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,11 @@ void	push_bottom(t_stack *a, int nb)
 	a->size++;
 }
 
-void	init_stack(t_stack *stack)
+void	init_stack(t_stack *stack, char id)
 {
 	stack->top = NULL;
 	stack->size = 0;
+	stack->id = id;
 }
 
 int	check_and_push(char **av, t_stack *a)
@@ -97,8 +98,8 @@ int	main(int ac, char **av)
 
 	if (ac <= 1)
 		return (0);
-	init_stack(&a);
-	init_stack(&b);
+	init_stack(&a, 'A');
+	init_stack(&b, 'B');
 	if (!check_and_push(av, &a))
 		return (1);
 	if (a.size <= 1 || ft_is_sorted(&a))
