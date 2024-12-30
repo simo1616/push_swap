@@ -6,7 +6,7 @@
 /*   By: mbendidi <mbendidi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/19 10:22:48 by mbendidi          #+#    #+#             */
-/*   Updated: 2024/12/29 19:21:44 by mbendidi         ###   ########.fr       */
+/*   Updated: 2024/12/30 11:47:51 by mbendidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,7 @@ void		bring_back_all_in_order(t_stack *a, t_stack *b);
 int			ft_position_of_max(t_stack *stack);
 int			find_position_in_stack(t_stack *stack, int start, int end);
 int			check_and_push(char **av, t_stack *a);
+int			find_position_frm_bot(t_stack *stack, int start, int end);
+int 		ft_position_of_next_max(t_stack *stack);
 
 #endif
