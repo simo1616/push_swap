@@ -6,7 +6,7 @@
 #    By: mbendidi <mbendidi@student.42lausanne.c    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/20 10:04:30 by mbendidi          #+#    #+#              #
-#    Updated: 2024/12/29 19:25:10 by mbendidi         ###   ########.fr        #
+#    Updated: 2024/12/30 10:45:56 by mbendidi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,6 @@ SRC_FILES = core/main.c \
             utils/sort_utils.c \
             utils/helpers.c \
             utils/validation.c \
-            utils/display.c \
 			utils/ft_is.c \
             utils/a_suprimer.c
 
