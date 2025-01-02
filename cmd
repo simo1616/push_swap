@@ -15,3 +15,5 @@ ARG=$(seq -989 985 | shuf -n 100); ./push_swap $ARG | wc -l
 
 
 git checkout debug-version 
+
+git restore --source=HEAD --staged --worktree .

@@ -6,7 +6,7 @@
 /*   By: mbendidi <mbendidi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 18:50:00 by mbendidi          #+#    #+#             */
-/*   Updated: 2024/12/30 11:46:21 by mbendidi         ###   ########.fr       */
+/*   Updated: 2025/01/02 18:53:42 by mbendidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,21 @@ void	bring_back_to_a(t_stack *a, t_stack *b)
 	}
 }
 
-int	get_chunk_size(int size)
+int	find_pos_in_stk_from_bot(t_stack *stack, int start, int end)
 {
-	if (size <= 100)
-		return (size / 20);
-	else
-		return (size / 45);
+	t_node	*cur;
+	int		pos;
+	int		stack_size;
+
+	cur = stack->top;
+	pos = 0;
+	stack_size = stack->size;
+	while (cur)
+	{
+		if (cur->index >= start && cur->index <= end)
+			return (stack_size - pos);
+		cur = cur->next;
+		pos++;
+	}
+	return (-1);
 }

@@ -6,30 +6,11 @@
 /*   By: mbendidi <mbendidi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/29 18:47:31 by mbendidi          #+#    #+#             */
-/*   Updated: 2024/12/30 11:50:24 by mbendidi         ###   ########.fr       */
+/*   Updated: 2025/01/02 18:55:27 by mbendidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-int	find_pos_in_stk_from_bot(t_stack *stack, int start, int end)
-{
-	t_node	*cur;
-	int		pos;
-	int		stack_size;
-
-	cur = stack->top;
-	pos = 0;
-	stack_size = stack->size;
-	while (cur)
-	{
-		if (cur->index >= start && cur->index <= end)
-			return (stack_size - pos);
-		cur = cur->next;
-		pos++;
-	}
-	return (-1);
-}
 
 void	push_chunk_to_b(t_stack *a, t_stack *b, t_chunk ck)
 {

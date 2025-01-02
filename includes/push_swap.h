@@ -6,7 +6,7 @@
 /*   By: mbendidi <mbendidi@student.42lausanne.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/30 22:40:10 by mbendidi          #+#    #+#             */
-/*   Updated: 2024/12/30 22:42:56 by mbendidi         ###   ########.fr       */
+/*   Updated: 2025/01/02 18:55:15 by mbendidi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ int			ft_is_sorted(t_stack *stack);
 void		index_values(t_stack *a);
 void		bring_back_to_a(t_stack *a, t_stack *b);
 void		push_chunk_to_b(t_stack *a, t_stack *b, t_chunk ck);
-int			get_chunk_size(int size);
 void		process_chunk(t_stack *a, t_stack *b, t_args arg);
 void		sort_chunks(t_stack *a, t_stack *b);
 void		bring_back_all_in_order(t_stack *a, t_stack *b);
@@ -100,6 +99,7 @@ int			ft_position_of_max(t_stack *stack);
 int			ft_position_of_next_max(t_stack *stack);
 int			find_position_in_stack(t_stack *stack, int start, int end);
 int			find_position_frm_bot(t_stack *stack, int start, int end);
+int			find_pos_in_stk_from_bot(t_stack *stack, int start, int end);
 int			check_and_push(char **av, t_stack *a);
 void		ft_move_top(t_stack *stack, int index);
 
